@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Install Tailscale
         run: |
-          curl -fsSL https://tailscale.com/install.sh | sh
-
+          $tsUrl = "https://pkgs.tailscale.com/stable/tailscale-setup-1.82.0-amd64.msi"
+          $installerPath = "$env:TEMP\tailscale.msi"
       - name: Start Tailscale (Login Required)
         run: |
           sudo tailscale up
