@@ -1,0 +1,22 @@
+name: Tailscale Login Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tailscale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+
+      - name: Start Tailscale (Login Required)
+        run: |
+          sudo tailscale up
+
+      - name: Show Tailscale Status
+        run: tailscale status
+
+      - name: Keep Runner Alive (1 hour)
+        run: sleep 3600
