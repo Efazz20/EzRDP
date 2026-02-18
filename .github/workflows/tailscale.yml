@@ -1,4 +1,4 @@
-name: Tailscale Auth Runner
+name: Tailscale Login Runner
 
 on:
   workflow_dispatch:
@@ -7,15 +7,14 @@ jobs:
   tailscale:
     runs-on: windows-latest
     timeout-minutes: 3600
-    
     steps:
       - name: Install Tailscale
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
 
-      - name: Connect to Tailscale using Auth Key
+      - name: Start Tailscale (Login Required)
         run: |
-          sudo tailscale up --authkey=${{ secrets.TALESCALE_AUTH_KEY }} --hostname=github-runner --accept-routes
+          sudo tailscale up
 
       - name: Show Tailscale Status
         run: tailscale status
